@@ -39,7 +39,7 @@ class DataIngestion():
 
             logging.info("saving top 5 record of dataset")
             #save for look the features after
-            df.head().to_csv(self.dataconfig.raw_data_path , header = True) 
+            df.head().to_csv(self.dataconfig.raw_data_path , header = True , index= False) 
 
             train_df , test_df = train_test_split(df , test_size = 0.2 ,random_state  = 42 )
             

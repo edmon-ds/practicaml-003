@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict Data Point</title>
+</head>
+<body>
+    <h2>Enter the Data for Prediction</h2>
+    <form action="{{ url_for('predict_datapoint')}}" method="POST">
+        <label for="battery_power">battery_power:</label>
+        <input type="number" id="battery_power" name="battery_power" required><br><br>
+
+        <label for="blue">blue:</label>
+        <input type="number" id="blue" name="blue" required><br><br>
+
+        <label for="clock_speed">clock_speed:</label>
+        <input type="number" id="clock_speed" name="clock_speed" step="0.01" required><br><br>
+
+        <label for="dual_sim">dual_sim:</label>
+        <input type="number" id="dual_sim" name="dual_sim" required><br><br>
+
+        <label for="fc">fc:</label>
+        <input type="number" id="fc" name="fc" required><br><br>
+
+        <label for="four_g">four_g:</label>
+        <input type="number" id="four_g" name="four_g" required><br><br>
+
+        <label for="int_memory">int_memory:</label>
+        <input type="number" id="int_memory" name="int_memory" required><br><br>
+
+        <label for="m_dep">m_dep:</label>
+        <input type="number" id="m_dep" name="m_dep" step="0.01" required><br><br>
+
+        <label for="mobile_wt">mobile_wt:</label>
+        <input type="number" id="mobile_wt" name="mobile_wt" required><br><br>
+
+        <label for="n_cores">n_cores:</label>
+        <input type="number" id="n_cores" name="n_cores" required><br><br>
+
+        <label for="pc">pc:</label>
+        <input type="number" id="pc" name="pc" required><br><br>
+
+        <label for="px_height">px_height:</label>
+        <input type="number" id="px_height" name="px_height" required><br><br>
+
+        <label for="px_width">px_width:</label>
+        <input type="number" id="px_width" name="px_width" required><br><br>
+
+        <label for="ram">ram:</label>
+        <input type="number" id="ram" name="ram" required><br><br>
+
+        <label for="sc_h">sc_h:</label>
+        <input type="number" id="sc_h" name="sc_h" required><br><br>
+
+        <label for="sc_w">sc_w:</label>
+        <input type="number" id="sc_w" name="sc_w" required><br><br>
+
+        <label for="talk_time">talk_time:</label>
+        <input type="number" id="talk_time" name="talk_time" required><br><br>
+
+        <label for="three_g">three_g:</label>
+        <input type="number" id="three_g" name="three_g" required><br><br>
+
+        <label for="touch_screen">touch_screen:</label>
+        <input type="number" id="touch_screen" name="touch_screen" required><br><br>
+
+        <label for="wifi">wifi:</label>
+        <input type="number" id="wifi" name="wifi" required><br><br>
+
+        <button type="submit">Predict</button>
+    </form>
+    <p>the prediction is {{results}}</p>
+    
+    <p>el modelo genera las predicciones por classes pero el problema es que son tantas features , 
+        que me cuesta, generar de manera manual las features para una clase en concreta , 
+        pude obtener predicciones para la clase 0 y la clase 3
+    </p>
+    <br>
+    <p>in this case the prediction is a range of prices</p>
+
+    <script>
+        // Función para generar un valor aleatorio dentro de un rango
+        function getRandomInRange(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        // Asignar valores a los campos según el rango especificado
+        window.onload = function() {
+            // battery_power: valores entre 1000 y 2000
+            document.getElementById("battery_power").value = getRandomInRange(1000, 2000);
+
+            // px_height, px_width, sc_h, sc_w: valores entre 600 y 1000
+            document.getElementById("px_height").value = getRandomInRange(600, 1000);
+            document.getElementById("px_width").value = getRandomInRange(600, 1000);
+            document.getElementById("sc_h").value = getRandomInRange(600, 1000);
+            document.getElementById("sc_w").value = getRandomInRange(600, 1000);
+
+            // ram: valores entre 4 y 12
+            document.getElementById("ram").value = getRandomInRange(4, 12);
+
+            // n_cores: valores entre 2 y 8
+            document.getElementById("n_cores").value = getRandomInRange(2, 8);
+
+            // Otros campos (0 a 2) como antes
+            const otherFieldIds = [
+                "blue", "clock_speed", "dual_sim", "fc", "four_g", "int_memory",
+                "m_dep", "mobile_wt", "pc", "talk_time", "three_g", "touch_screen", "wifi"
+            ];
+            otherFieldIds.forEach(id => {
+                document.getElementById(id).value = getRandomInRange(0, 2);
+            });
+        };
+    </script>
+</body>
+</html>
