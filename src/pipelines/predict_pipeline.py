@@ -5,7 +5,6 @@ from src.components.data_transformation import DataTransformationConfig
 from src.components.model_trainer import ModelTrainerConfig
 from src.exception import CustomException
 
-
 class CustomData:
     def __init__(self  ,battery_power,blue,clock_speed,
                  dual_sim,fc,four_g,int_memory,m_dep,mobile_wt,
@@ -42,6 +41,7 @@ class PredictPipeline():
     def __init__(self):
         self.preprocessor = load_object(DataTransformationConfig.preprocessor_path)
         self.model = load_object(ModelTrainerConfig.model_path)
+        
     def predict(self , user_data):
         try:
             data_transformed = self.preprocessor.transform(user_data)

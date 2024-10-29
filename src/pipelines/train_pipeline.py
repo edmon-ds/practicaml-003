@@ -8,13 +8,11 @@ data_ingestion = DataIngestion()
 data_transformation = DataTransformation()
 model_trainer = ModelTrainer()
 
-print("starting data ingestion")
+print("starting data ingestion...")
 train_df , test_df  =  data_ingestion.inittiate_data_ingestion()
 
-
-print("preprocessing data")
+print("preprocessing data...")
 train_array , test_array = data_transformation.initiate_data_transformation(train_df , test_df)
-
 
 print("training models ...")
 best_model_name , best_model_score , best_model = model_trainer.initiate_model_training(train_array , test_array)

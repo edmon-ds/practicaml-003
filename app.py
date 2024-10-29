@@ -1,6 +1,7 @@
 from flask import Flask , request , render_template
 from src.exception import CustomException
 from src.pipelines.predict_pipeline import * 
+
 app  = Flask(__name__)
 
 @app.route("/")
@@ -11,11 +12,11 @@ def index():
 @app.route("/predict" , methods = [ "GET", "POST"])
 def predict_datapoint():
     if request.method =="GET":
-        print("hola get")
+        #print("in get")
         return render_template("predict.html")
     else:
         try:
-            print("hola post")
+           # print("in post")
             user_data = CustomData(
                 battery_power = request.form.get("battery_power"),
                 blue = request.form.get("blue"),
@@ -41,8 +42,7 @@ def predict_datapoint():
             user_data_df = user_data.get_data_as_dataframe()
             predict_pipeline = PredictPipeline()
             preds = predict_pipeline.predict(user_data_df)
-            print(user_data_df)
-            print(f" prediccion {preds}")
+            
             return render_template("predict.html" , results = preds[0])
 
         except Exception as e:
